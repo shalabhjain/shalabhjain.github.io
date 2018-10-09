@@ -1,4 +1,3 @@
-var content;
 var input;
 var status;
 var tableContent;
@@ -7,7 +6,7 @@ $(function () {
     "use strict";
 
     // for better performance - to avoid searching in DOM
-    content = $('#content');
+    // content = $('#content');
     input = $('#input');
     status = $('#status');
     tableContent = $("#table-content");
@@ -62,12 +61,20 @@ $(function () {
 
 function addMessage(dt, canID, mesg) {
     //content.prepend('<p>' + dt + ' ' + canID + ' ' + mesg + '</p>');
-    tableContent.prepend("<tr><td>" + dt/1000 + "</td><td>" + canID + "</td><td>" + mesg + "</td></tr>")
+    tableContent.prepend("<tr><td>" + (dt/1000).toFixed(3) + "</td><td>" + canID + "</td><td>" + mesg + "</td></tr>")
+}
+
+function resetContentTable() {
+  tableContent.html("<tr>" +
+    "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>" +
+    "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>" +
+    "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>" +
+  "</tr>");
 }
 
 function probeBus(busName) {
   //alert(busName);
-  $("#content").html("");
+  resetContentTable();
   var oldBusName = $("#logbus").val();
   if(oldBusName != '') {
     console.log("Removing existing probe");
@@ -101,7 +108,7 @@ function closeNav() {
   var busName = $("#logbus").val();
   console.log('Removing probe for ' + busName)
   $("#sidelogwin").width(0);
-  $("#content").html("");
+  resetContentTable();
   $("#logbus").val('');
 
   switch(busName) {
