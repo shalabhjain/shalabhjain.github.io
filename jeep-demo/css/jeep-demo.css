@@ -1,0 +1,229 @@
+
+* {
+  font-family: tahoma;
+  font-size:12px;
+  padding:0px;
+  margin:0px;
+}
+
+body, html {
+  height: 100%;
+  background-color: black;
+}
+
+p {
+  line-height:18px;
+}
+
+#toggle {
+  position: relative;
+  left: 400px;
+  font-size: 1.2em;
+  visibility: visible;
+}
+
+#toggle:hover {
+  color: white;
+  transition: 0.5s;
+}
+/*
+#jeep-top-image {
+  position:relative;
+  top: 50%;
+left: 50%;
+width: auto;
+height: auto;
+-webkit-transform: translate(-50%,-50%);
+-moz-transform: translate(-50%,-50%);
+-ms-transform: translate(-50%,-50%);
+-o-transform: translate(-50%,-50%);
+transform: translate(-50%,-50%);
+} */
+
+#main-container {
+    position: relative;
+    text-align: center;
+    color: black;
+    background-color: rgb(0,0,0);
+}
+
+#jeep-img-container {
+    position: absolute;
+    width: 1646px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    /* border-style: solid;
+    border-width: 5px;
+    border-color: red; */
+    visibility: hidden;
+}
+
+#disp-dig-1 {
+    position: absolute;
+    left: 895px;
+    top: 236px;
+    visibility: visible;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+#disp-dig-2 {
+    position: absolute;
+    left: 910px;
+    top: 235px;
+    visibility: visible;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+#disp-dig-3 {
+    position: absolute;
+    left: 925px;
+    top: 233px;
+    visibility: visible;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+#disp-dig-4 {
+    position: absolute;
+    left: 940px;
+    top: 232px;
+    visibility: visible;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+#disp-dig-status {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(200,0,0,0.75);
+    -webkit-clip-path: polygon(859px 257px,1006px 245px,1005px 225px,860px 238px);
+    clip-path: url("#clipPolygon");
+    visibility: visible;
+}
+
+
+#jeep-container {
+  display: flex;
+  justify: left;
+  justify-content: center;
+  width: 100%;
+  min-width: 1646px;
+  min-height: 800px;
+  background-color: rgb(0,0,0);
+}
+
+.buttonnav {
+  z-index: 1
+}
+
+div {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.busBCAN {
+  cursor: url(serial.cur), -moz-zoom-in, auto;
+  pointer-events: auto;
+}
+
+.busCCAN {
+  cursor: url(serial.cur), -moz-zoom-in, auto;
+  pointer-events: auto;
+}
+
+.logwin {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 0;
+  top: 0;
+  right: 0;
+  overflow-x: scroll;
+  background-color: rgba(0,0,0,0.85);
+  transition: 0.5s;
+  padding-top: 50px;
+  padding-left: 10px;
+}
+
+.logwin a {
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.logwin a:hover {
+  color: #f1f1f1;
+}
+
+.logwin #closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#content {
+  padding:2px;
+  width: 100%;
+  overflow-y: scroll;
+  margin-top:10px;
+  margin-bottom:10px;
+  color: rgb(210,210,210);
+}
+
+/* @table_width: 385px;
+@table_body_height: 400px;
+@column_one_width: 180px;
+@column_two_width: 100px;
+@column_three_width: 105px;
+
+.fixed_headers {
+  width: @table_width;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: rgb(210,210,210);
+  margin-left: 10px;
+  line-height: 1.4;
+
+  th, td {
+    padding: 5px;
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  td:nth-child(1), th:nth-child(1) { min-width: @column_one_width; }
+  td:nth-child(2), th:nth-child(2) { min-width: @column_two_width; }
+  td:nth-child(3), th:nth-child(3) { width: @column_three_width; }
+
+  thead {
+    background-color: @header_background_color;
+    color: @header_text_color;
+    tr {
+      display: block;
+      position: relative;
+    }
+  }
+  tbody {
+    display: block;
+    overflow: scroll;
+    width: 100%;
+    height: @table_body_height;
+    tr:nth-child(even) {
+      background-color: @alternate_row_background_color;
+    }
+  }
+} */
