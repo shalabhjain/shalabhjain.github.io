@@ -63,9 +63,15 @@ $(function () {
 //          + ': ' + message + '</p>');
 // }
 
-function addMessage(dt, canID, mesg) {
+function addMessage(dt, canID, mesg, colTag = 0) {
     //content.prepend('<p>' + dt + ' ' + canID + ' ' + mesg + '</p>');
-    tableContent.prepend("<tr><td>" + (dt/1000).toFixed(3) + "</td><td>" + canID + "</td><td>" + mesg + "</td></tr>")
+    if (colTag == 0) {
+      tableContent.prepend("<tr><td>" + (dt/1000).toFixed(3) + "</td><td>" + canID + "</td><td>" + mesg + "</td></tr>")
+    } else if (colTag == 1) {
+      tableContent.prepend("<tr id=\"tablerowred\"><td>" + (dt/1000).toFixed(3) + "</td><td>" + canID + "</td><td>" + mesg + "</td></tr>")
+    } else {
+      console.log("Wrong value of colTag " + colTag );
+    }
 }
 
 function resetContentTable() {
@@ -182,7 +188,8 @@ function sendCodeChallenge(code) {
   busBCANContents.push([
       performance.now(),
       '0x100',
-      code.split('').map(i => '0' + i).join(' ')
+      code.split('').map(i => '0' + i).join(' '),
+      1
   ]);
 }
 
@@ -200,7 +207,8 @@ function sendCodeResponse(resp) {
   busBCANContents.push([
       performance.now(),
       '0x200',
-      '0' + resp
+      '0' + resp,
+      1
   ]);
 }
 
@@ -216,10 +224,30 @@ function initCCANMessageArray() {
     function () {
       busCCANContents.push([
           performance.now(),
-          '0x12c',
+          '0x12C',
           Math.random().toString(16).slice(-6).match(/.{2}/g).join(' ')
       ]);
-    }, 2000
+    }, 1000
+  ]);
+
+  busCCANmesgs.push([
+    function () {
+      busCCANContents.push([
+          performance.now(),
+          '0x291',
+          Math.random().toString(16).slice(-4).match(/.{2}/g).join(' ')
+      ]);
+    }, 900
+  ]);
+
+  busCCANmesgs.push([
+    function () {
+      busCCANContents.push([
+          performance.now(),
+          '0x397',
+          Math.random().toString(16).slice(-4).match(/.{2}/g).join(' ')
+      ]);
+    }, 700
   ]);
 
   console.log("Added " + busCCANmesgs.length + " CCAN messages");
@@ -262,10 +290,32 @@ function initBCANMessageArray() {
     function () {
       busBCANContents.push([
           performance.now(),
-          '0x02c',
-          Math.random().toString(16).slice(-6).match(/.{2}/g).join(' ')
+          '0x5C8',
+          Math.random().toString(16).slice(-6).match(/.{2}/g).join(' '),
+          0
       ]);
-    }, 2000
+    }, 1000
+  ]);
+
+  // busBCANmesgs.push([
+  //   function () {
+  //     busBCANContents.push([
+  //         performance.now(),
+  //         '0x491',
+  //         Math.random().toString(16).slice(-4).match(/.{2}/g).join(' ')
+  //     ]);
+  //   }, 700
+  // ]);
+
+  busBCANmesgs.push([
+    function () {
+      busBCANContents.push([
+          performance.now(),
+          '0x305',
+          Math.random().toString(16).slice(-4).match(/.{2}/g).join(' '),
+          0
+      ]);
+    }, 900
   ]);
 
   console.log("Added " + busBCANmesgs.length + " BCAN messages");
@@ -280,7 +330,7 @@ function addBCANprobe() {
   busBCANinterval[j] = setInterval(function() {
     var mesgQLen = busBCANContents.length;
     for(var k = 0; k < mesgQLen; k++) {
-        addMessage(busBCANContents[k][0], busBCANContents[k][1], busBCANContents[k][2]);
+        addMessage(busBCANContents[k][0], busBCANContents[k][1], busBCANContents[k][2], busBCANContents[k][3]);
     }
     busBCANContents.splice(0, mesgQLen);
   }, 1500);
@@ -308,10 +358,30 @@ function initLINMessageArray() {
     function () {
       busLINContents.push([
           performance.now(),
-          '0xa2c',
+          '0x32C',
           Math.random().toString(16).slice(-6).match(/.{2}/g).join(' ')
       ]);
-    }, 2000
+    }, 1000
+  ]);
+
+  busLINmesgs.push([
+    function () {
+      busLINContents.push([
+          performance.now(),
+          '0x129',
+          Math.random().toString(16).slice(-4).match(/.{2}/g).join(' ')
+      ]);
+    }, 900
+  ]);
+
+  busLINmesgs.push([
+    function () {
+      busLINContents.push([
+          performance.now(),
+          '0x50A',
+          Math.random().toString(16).slice(-6).match(/.{2}/g).join(' ')
+      ]);
+    }, 700
   ]);
 
   console.log("Added " + busLINmesgs.length + " LIN messages");

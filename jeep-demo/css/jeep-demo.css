@@ -185,6 +185,10 @@ div {
   color: rgb(210,210,210);
 }
 
+#tablerowred {
+  color: red;
+}
+
 /* @table_width: 385px;
 @table_body_height: 400px;
 @column_one_width: 180px;
