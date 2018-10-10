@@ -1,6 +1,9 @@
+"use strict";
+
 var input;
 var status;
 var tableContent;
+var codeStatusWin;
 
 $(function () {
     "use strict";
@@ -10,6 +13,7 @@ $(function () {
     input = $('#input');
     status = $('#status');
     tableContent = $("#table-content");
+    codeStatusWin = $("#disp-dig-status");
 
     // $(".busCCAN").attr("onclick", "probeBus('busCCAN')");
     // $(".busBCAN").attr("onclick", "probeBus('busBCAN')");
@@ -130,7 +134,14 @@ function closeNav() {
 var digitNum = 1;
 var code = '';
 var unlockCode = '3212';
+var codeKeyPadLocked = 0;
+
 function processKeypadNum(val) {
+  console.log("Code keypad status " + codeKeyPadLocked);
+  if(codeKeyPadLocked == 1) {
+    console.log("Code keypad is locked " + codeKeyPadLocked);
+    return;
+  }
   $("#disp-dig-"+digitNum).html(val);
   code = code + val;
   if(++digitNum > 4) {
@@ -163,6 +174,8 @@ function verifyCode(code, pos) {
 }
 
 function sendCodeChallenge(code) {
+  codeKeyPadLocked = 1;
+  codeStatusWin.css("background-color", "rgba(200,200,0,0.75)")
   if($("#logbus").val() != 'busBCAN') {
     return;
   }
@@ -174,10 +187,11 @@ function sendCodeChallenge(code) {
 }
 
 function sendCodeResponse(resp) {
+  codeKeyPadLocked = 0;
   if(resp == '1') {
-    $("#disp-dig-status").css("background-color", "rgba(0,200,0,0.75)")
+    codeStatusWin.css("background-color", "rgba(0,200,0,0.75)")
   } else {
-    $("#disp-dig-status").css("background-color", "rgba(200,0,0,0.75)")
+    codeStatusWin.css("background-color", "rgba(200,0,0,0.75)")
   }
 
   if($("#logbus").val() != 'busBCAN') {
