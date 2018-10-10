@@ -21,19 +21,19 @@ $(function () {
 
     $(".busCCAN").on("click", function(e){
       e.preventDefault();
-      probeBus('busCCAN');
+      probeBus('busCCAN', 'CCAN');
       console.log("Probing CCAN bus");
     });
 
     $(".busBCAN").on("click", function(e){
       e.preventDefault();
-      probeBus('busBCAN');
+      probeBus('busBCAN', 'BCAN');
       console.log("Probing BCAN bus");
     });
 
     $(".busLIN").on("click", function(e){
       e.preventDefault();
-      probeBus('busLIN');
+      probeBus('busLIN', 'LIN');
       console.log("Probing LIN bus");
     });
 
@@ -95,7 +95,7 @@ function resetContentTable() {
   "</tr>");
 }
 
-function probeBus(busName) {
+function probeBus(busName, busTitle="&nbsp;") {
   //alert(busName);
   resetContentTable();
   var oldBusName = $("#logbus").val();
@@ -121,6 +121,8 @@ function probeBus(busName) {
     default:
       console.log("Bus: " + busName + " not found");
   }
+
+  $("#wintitle").html(busTitle);
   //connection.send(JSON.stringify( { type: 'probeon', data: busName} ));
   //document.getElementById("mySidenav").style.width = "400px";
   //$("#jeep-container").width($(window).width()-400);
