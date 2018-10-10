@@ -43,6 +43,7 @@ $(function () {
       //alert("The digit is "  + $(this).attr('id'));
     });
 
+    correctLayerPosition();
   //alert("height is " + abc);
   //  $("#jeep-container").height($(window).height());
    //$("#jeep-container").attr("background-color", "blue");
@@ -52,6 +53,18 @@ $(function () {
    initLINMessageArray();
 });
 
+$( window ).resize(function() {
+  correctLayerPosition();
+});
+
+function correctLayerPosition() {
+  //console.log("window " + $(window).width())
+  //console.log("document" + $(document).width())
+
+  var leftOffset = ($(window).width() > 1646)?$(window).width()/2:823;
+  //console.log("The offset should be" + leftOffset + "px" )
+  $("#jeep-img-container").css("left", leftOffset + "px");
+}
 /**
  * Add message to the chat window
  */
